@@ -11,7 +11,6 @@ public class PFEvaluator {
         boolean failed = false;
         while (in.hasNext()){
             String line = in.next();
-            System.out.println(line);
             if (line.matches("\\d+")){
                 int number = Integer.parseInt(line);
                 stack.push(number);

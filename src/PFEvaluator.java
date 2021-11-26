@@ -6,9 +6,8 @@ public class PFEvaluator {
     public static void main(String[] args) throws FileNotFoundException {
         File f = new File("Calc1.stk");
         Scanner in = new Scanner(f);
-        ArrayList<Token> tokenList = new ArrayList<Token>();
+        ArrayList<Token> tokenList = new ArrayList<>();
         String[] validOp = new String[]{"+", "-", "*", "/"};
-        String invalidChar = "";
         while (in.hasNext()){
             String line = in.next();
             if (line.matches("\\d+")){
@@ -16,19 +15,13 @@ public class PFEvaluator {
                 tokenList.add(token);
             }
             else if (Arrays.asList(validOp).contains(line)){
-                Token token = null;
-                if (line.equals("+")){
-                    token = new Token(TokenType.PLUS, line);
-                }
-                else if (line.equals("-")){
-                    token = new Token(TokenType.MINUS, line);
-                }
-                else if (line.equals("/")){
-                    token = new Token(TokenType.SLASH, line);
-                }
-                else if (line.equals("*")){
-                    token = new Token(TokenType.STAR, line);
-                }
+                Token token = switch (line) {
+                    case "+" -> new Token(TokenType.PLUS, line);
+                    case "-" -> new Token(TokenType.MINUS, line);
+                    case "/" -> new Token(TokenType.SLASH, line);
+                    case "*" -> new Token(TokenType.STAR, line);
+                    default -> null;
+                };
                 tokenList.add(token);
             }
             else{
